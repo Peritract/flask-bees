@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% block headers %}
+<script src={{ url_for("static", filename="./scripts/create.js")}} defer></script>
+{% endblock %}
+{% block title %}Make a new bee{% endblock %}
+{% block content %}
+<h1>Make a bee!</h1>
+<form id="bee-gone">
+    <label for="id-input">ID:</label>
+    <input type="number" name="bee-id" id="id-input">
+    <label for="name-input">Name:</label>
+    <input type="text" name="bee-name" id="name-input">
+    <button type="submit">Make a bee!</button>
+</form>
+{% endblock %}

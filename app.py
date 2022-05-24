@@ -14,20 +14,23 @@ def list_bees():
         "bees": Bee.get_all_as_dicts()
     })
 
-@app.route("/bees/new", methods=["POST"])
+@app.route("/bees/new", methods=["POST", "GET"])
 def create_bees():
-    try:
-        data = request.json
-        bee = Bee.create_bee(data["id"], data["name"], data["queen"])
-        return jsonify({
-            "success": True,
-            "bee": bee.to_dict()
-        }), 201
-    except Exception as err:
-        return jsonify({
-            "success": False,
-            "error": str(err)
-        })
+    if request.method == "GET":
+        return render_template("create_bee.html")
+    elif request.method == "POST":
+        try:
+            data = request.json
+            bee = Bee.create_bee(data["id"], data["name"], data["queen"])
+            return jsonify({
+                "success": True,
+                "bee": bee.to_dict()
+            }), 201
+        except Exception as err:
+            return jsonify({
+                "success": False,
+                "error": str(err)
+            })
 
 @app.route("/bees/<int:id>", methods=["GET", "DELETE"])
 def interact_with_bee(id):
@@ -49,6 +52,11 @@ def interact_with_bee(id):
             "success": False,
             "error": str(err)
         })
+
+@app.route("/succession")
+def succession():
+    Bee.peaceful_transition()
+    return "Done"
 
 @app.route("/")
 def index():
