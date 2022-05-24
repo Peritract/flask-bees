@@ -30,7 +30,7 @@ def create_bees():
             return jsonify({
                 "success": False,
                 "error": str(err)
-            })
+            }), 400
 
 @app.route("/bees/<int:id>", methods=["GET", "DELETE"])
 def interact_with_bee(id):
