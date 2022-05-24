@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+{% block headers %}
+<link rel="stylesheet" type="text/css" href={{ url_for("static", filename="./styles/bee-list.css") }} />
+{% endblock %}
+{% block title %}A list of bees{% endblock %}
+{% block content %}
+<h1>Bee list</h1>
+{% for bee in bees %}
+    <div class="b-block">
+        {% if bee.queen %}
+        <h4 class="regal">{{ bee["name"] }}</h4>
+        {% else %}
+        <h4>{{ bee["name"] }}</h4>
+        {% endif %}
+    </div>
+{% endfor %}
+{% endblock %}

@@ -1,6 +1,7 @@
 class Bee():
 
-    _all = [(1, "Beeatrice", True), (2, "Beenard", False), (3, "Elizabeeth", False)]
+    _all = [(1, "Beeatrice", False), (2, "Beenard", False), (3, "Elizabeeth", False),
+            (4, "Libbee", True)]
 
     def __init__(self, id, name, queen=False):
         self.id = id

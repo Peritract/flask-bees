@@ -7,10 +7,6 @@ from models.bee import Bee
 app = Flask(__name__)
 CORS(app)
 
-@app.route("/")
-def index():
-    return render_template("index.html", app_name="Bumble")
-
 @app.route("/bees")
 def list_bees():
     return jsonify({
@@ -53,6 +49,20 @@ def interact_with_bee(id):
             "success": False,
             "error": str(err)
         })
+
+@app.route("/")
+def index():
+    return render_template("index.html")
+
+@app.route("/bee_list")
+def display_bees_to_humans():
+    bees = Bee.get_all_as_dicts()
+    bees = sorted(bees, key=lambda x: x["queen"], reverse=True)
+    return render_template("bee_list.html", bees=bees)
+
+@app.errorhandler(exceptions.NotFound)
+def page_not_found(err):
+    return render_template("404.html", error=err)
 
 if __name__ == "__main__":
     app.run(debug=True)

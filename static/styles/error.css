@@ -1,0 +1,5 @@
+.error {
+    text-transform: uppercase;
+    color: red;
+    border: 3px dotted chartreuse;
+}
